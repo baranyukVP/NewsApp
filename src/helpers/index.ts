@@ -1,0 +1,1 @@
+export { getNewsApiQueryString } from './getNewsApiQueryString';

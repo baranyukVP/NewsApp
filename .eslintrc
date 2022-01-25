@@ -66,7 +66,7 @@
     "jsdoc/require-param-description": "off",
     "no-bitwise": "error",
     "no-console": [
-      "error",
+      "warn",
       {
         "allow": ["warn", "clear", "error"]
       }
@@ -161,8 +161,6 @@
         "next": ["export", "const", "let"]
       }
     ],
-    "arrow-body-style": ["error", "as-needed"],
-    "arrow-parens": ["error", "as-needed"],
     "eol-last": "error",
     "linebreak-style": ["error", "unix"],
     "valid-jsdoc": "off", // valid-jsdoc задепрекейчен в связи с наличием eslint-plugin-jsdoc
