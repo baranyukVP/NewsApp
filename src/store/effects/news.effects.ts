@@ -9,7 +9,10 @@ export const fetchTopHeadlines$ = (actions$: Observable<any>) =>
     ofType(FetchTopHeadlines.Pending),
     switchMap(({ payload }) => {
       return fetchTopHeadlines().pipe(
-        map((data) => ({ type: FetchTopHeadlines.Success }))
+        map((data) => ({
+          type: FetchTopHeadlines.Success,
+          payload: data?.data?.sources,
+        }))
       );
     })
   );
