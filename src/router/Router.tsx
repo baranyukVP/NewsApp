@@ -1,19 +1,15 @@
-import React from "react";
-import {
-    BrowserRouter,
-    Route, Routes,
-} from "react-router-dom";
-import {MainPage} from "../components/pages/MainPage";
+import React from 'react';
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-export const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<MainPage/>} />
-            </Routes>
-        </BrowserRouter>
-    );
-}
+import { MainPage } from '../components/pages/MainPage';
+
+export const Router = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default Router;
