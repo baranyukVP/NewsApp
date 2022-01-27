@@ -1,16 +1,35 @@
+import { Action } from 'redux';
 import { ofType } from 'redux-observable';
 import { map, Observable, switchMap } from 'rxjs';
 
-import { FetchTopHeadlines } from '../actions/news.actions';
-import { fetchTopHeadlines } from '../services/news.services';
+import { INewsPayload } from '../../types/News';
+import { FetchNews, FetchSources } from '../actions/news.actions';
+import { fetchNews, fetchSources } from '../services/news.services';
 
-export const fetchTopHeadlines$ = (actions$: Observable<any>) =>
+interface INewsAction extends Action {
+  payload: INewsPayload;
+}
+
+export const fetchNews$ = (actions$: Observable<INewsAction>) =>
   actions$.pipe(
-    ofType(FetchTopHeadlines.Pending),
+    ofType(FetchNews.Pending),
     switchMap(({ payload }) => {
-      return fetchTopHeadlines().pipe(
+      return fetchNews(payload).pipe(
         map((data) => ({
-          type: FetchTopHeadlines.Success,
+          type: FetchNews.Success,
+          payload: data?.data?.articles,
+        }))
+      );
+    })
+  );
+
+export const fetchSources$ = (actions$: Observable<Action<any>>) =>
+  actions$.pipe(
+    ofType(FetchSources.Pending),
+    switchMap(() => {
+      return fetchSources().pipe(
+        map((data) => ({
+          type: FetchSources.Success,
           payload: data?.data?.sources,
         }))
       );

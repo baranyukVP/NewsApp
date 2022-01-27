@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Link, Typography } from '@mui/material';
+import { Chip, Link } from '@mui/material';
 
 import { ISourceDto } from '../../../types';
 
@@ -9,16 +9,12 @@ interface ISourceComponent {
 }
 
 export const Source: FC<ISourceComponent> = ({ source }) => {
-  const { name, description, url } = source;
+  const { name, url } = source;
 
   return (
-    <>
-      <Typography>{name}</Typography>
-      <Typography>{description}</Typography>
-      <Link href={url} target="_blank">
-        {url}
-      </Link>
-    </>
+    <Link href={url} target="_blank">
+      <Chip sx={{ cursor: 'pointer' }} label={name} color="primary" />
+    </Link>
   );
 };
 
