@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
+  styled,
   Typography,
 } from '@mui/material';
 
@@ -17,6 +18,10 @@ interface INewsComponent {
   news: INewsDto;
 }
 
+const StyledNewsComponent = styled(Card)(({ theme }) => ({
+  margin: `${theme.spacing(2)} 0`,
+}));
+
 export const News: FC<INewsComponent> = ({ news }) => {
   const handleOpenNews = useCallback(() => {
     if (news.url) {
@@ -25,7 +30,7 @@ export const News: FC<INewsComponent> = ({ news }) => {
   }, [news.url]);
 
   return (
-    <Card variant="outlined">
+    <StyledNewsComponent variant="outlined">
       <CardHeader title={news.title} />
       <CardMedia component="img" image={news.urlToImage} alt="news-image" />
       <CardContent>
@@ -37,7 +42,7 @@ export const News: FC<INewsComponent> = ({ news }) => {
           <OpenInNew />
         </IconButton>
       </CardActions>
-    </Card>
+    </StyledNewsComponent>
   );
 };
 

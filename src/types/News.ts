@@ -1,4 +1,4 @@
-import { TLanguage, TSortBy } from './common';
+import { TCategory, TCountry, TLanguage, TSortBy } from './common';
 import { ISourceDto } from './Source';
 
 export interface INewsDto {
@@ -22,7 +22,8 @@ export interface INewsDto {
 }
 
 export interface INewsPayload {
-  search: string;
+  // search string
+  q: string;
   qlnTitle?: string;
   sources?: ISourceDto[];
   domains?: string[];
@@ -31,6 +32,16 @@ export interface INewsPayload {
   to?: Date;
   language?: TLanguage;
   sortBy?: TSortBy;
+  pageSize?: number;
+  page?: number;
+}
+
+export interface ITopHeadlinesPayload {
+  // search string
+  q?: string;
+  sources?: ISourceDto[];
+  category?: TCategory;
+  country?: TCountry;
   pageSize?: number;
   page?: number;
 }

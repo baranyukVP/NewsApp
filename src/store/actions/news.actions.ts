@@ -5,6 +5,13 @@ export enum FetchNews {
   Clear = '[Clear] Clear news',
 }
 
+export enum FetchTopHeadlines {
+  Pending = '[Pending] Fetch top headlines',
+  Success = '[Success] Success on fetching top headlines',
+  Error = '[Error] Error occurred when fetching top headlines',
+  Clear = '[Clear] Clear top headlines',
+}
+
 export enum FetchSources {
   Pending = '[Pending] Fetch top sources',
   Success = '[Success] Success on fetching sources',

@@ -3,7 +3,11 @@ import { combineEpics } from 'redux-observable';
 import { createEpicMiddleware } from 'redux-observable';
 import { catchError } from 'rxjs';
 
-import { fetchNews$, fetchSources$ } from './effects/news.effects';
+import {
+  fetchNews$,
+  fetchSources$,
+  fetchTopHeadlines$,
+} from './effects/news.effects';
 import { INewsStore, newsReducers } from './reducers/news.reducers';
 
 export interface IStore {
@@ -14,7 +18,11 @@ export const rootReducer = combineReducers({ news: newsReducers });
 
 export const rootEpic = (action$: any, store$: any, dependencies: any) =>
   // @ts-ignore
-  combineEpics(fetchSources$, fetchNews$)(action$, store$, dependencies).pipe(
+  combineEpics(fetchSources$, fetchNews$, fetchTopHeadlines$)(
+    action$,
+    store$,
+    dependencies
+  ).pipe(
     catchError((error, source) => {
       console.error(error);
 
