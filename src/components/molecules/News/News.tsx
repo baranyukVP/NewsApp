@@ -10,19 +10,22 @@ import {
   IconButton,
   styled,
   Typography,
+  Zoom,
 } from '@mui/material';
 
 import { INewsDto } from '../../../types/News';
 
 interface INewsComponent {
   news: INewsDto;
+  // animation delay on appearance in ms
+  transitionDelay?: number;
 }
 
 const StyledNewsComponent = styled(Card)(({ theme }) => ({
   margin: `${theme.spacing(2)} 0`,
 }));
 
-export const News: FC<INewsComponent> = ({ news }) => {
+export const News: FC<INewsComponent> = ({ news, transitionDelay = 0 }) => {
   const handleOpenNews = useCallback(() => {
     if (news.url) {
       window.open(news.url, '_blank');
@@ -30,19 +33,25 @@ export const News: FC<INewsComponent> = ({ news }) => {
   }, [news.url]);
 
   return (
-    <StyledNewsComponent variant="outlined">
-      <CardHeader title={news.title} />
-      <CardMedia component="img" image={news.urlToImage} alt="news-image" />
-      <CardContent>
-        <Typography gutterBottom>{news.author}</Typography>
-        <Typography>{news.description}</Typography>
-      </CardContent>
-      <CardActions>
-        <IconButton onClick={handleOpenNews} aria-label="open">
-          <OpenInNew />
-        </IconButton>
-      </CardActions>
-    </StyledNewsComponent>
+    <Zoom
+      in={!!news}
+      timeout={200}
+      style={{ transitionDelay: `${transitionDelay}ms` }}
+    >
+      <StyledNewsComponent variant="outlined">
+        <CardHeader title={news.title} />
+        <CardMedia component="img" image={news.urlToImage} alt="news-image" />
+        <CardContent>
+          <Typography gutterBottom>{news.author}</Typography>
+          <Typography>{news.description}</Typography>
+        </CardContent>
+        <CardActions>
+          <IconButton onClick={handleOpenNews} aria-label="open">
+            <OpenInNew />
+          </IconButton>
+        </CardActions>
+      </StyledNewsComponent>
+    </Zoom>
   );
 };
 

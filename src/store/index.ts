@@ -7,6 +7,7 @@ import {
   fetchNews$,
   fetchSources$,
   fetchTopHeadlines$,
+  setCategory,
 } from './effects/news.effects';
 import { INewsStore, newsReducers } from './reducers/news.reducers';
 
@@ -17,12 +18,13 @@ export interface IStore {
 export const rootReducer = combineReducers({ news: newsReducers });
 
 export const rootEpic = (action$: any, store$: any, dependencies: any) =>
-  // @ts-ignore
-  combineEpics(fetchSources$, fetchNews$, fetchTopHeadlines$)(
-    action$,
-    store$,
-    dependencies
-  ).pipe(
+  combineEpics(
+    // @ts-ignore
+    fetchSources$,
+    fetchNews$,
+    fetchTopHeadlines$,
+    setCategory
+  )(action$, store$, dependencies).pipe(
     catchError((error, source) => {
       console.error(error);
 

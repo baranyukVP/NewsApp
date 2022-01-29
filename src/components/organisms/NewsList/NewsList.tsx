@@ -12,7 +12,11 @@ export const NewsList = () => {
   return (
     <Box>
       {news?.map((item, index) => (
-        <News key={`${index}-${item.source}`} news={item} />
+        <News
+          key={`${index}-${item.source}`}
+          news={item}
+          transitionDelay={index * 100}
+        />
       ))}
     </Box>
   );

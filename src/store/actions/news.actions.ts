@@ -10,6 +10,7 @@ export enum FetchTopHeadlines {
   Success = '[Success] Success on fetching top headlines',
   Error = '[Error] Error occurred when fetching top headlines',
   Clear = '[Clear] Clear top headlines',
+  SetCategory = '[SetCategory] Setting up the category for top headlines',
 }
 
 export enum FetchSources {

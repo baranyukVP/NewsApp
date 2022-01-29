@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useCallback } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { IconButton, InputBase, Paper } from '@mui/material';
+import { Grow, IconButton, InputBase, Paper } from '@mui/material';
 
 interface ISearchField {
   name?: string;
@@ -32,26 +32,32 @@ export const SearchField: FC<ISearchField> = ({
   }, [onSearch]);
 
   return (
-    <Paper
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-    >
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        name={name}
-        value={value}
-        onChange={handleOnChange}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') {
-            handleSearch();
-          }
-        }}
-        placeholder={placeHolder}
-        inputProps={{ 'aria-label': 'news search' }}
-      />
-      <IconButton sx={{ p: '10px' }} onClick={handleSearch} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+    <Grow in={true}>
+      <Paper
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          name={name}
+          value={value}
+          onChange={handleOnChange}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+          placeholder={placeHolder}
+          inputProps={{ 'aria-label': 'news search' }}
+        />
+        <IconButton
+          sx={{ p: '10px' }}
+          onClick={handleSearch}
+          aria-label="search"
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+    </Grow>
   );
 };
 

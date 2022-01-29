@@ -6,10 +6,12 @@ import { useDispatch } from 'react-redux';
 import { FetchNews } from '../../../store/actions/news.actions';
 import { SearchField } from '../../atoms/SearchField';
 import { Categories } from '../../molecules/Categories';
+import HeaderActions from '../../molecules/HeaderActions/HeaderActions';
 
 export const Header: FC = ({ children }) => {
   const dispatch = useDispatch();
 
+  const [activeAction, setActiveAction] = useState<string>();
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleSearch = useCallback(() => {
@@ -21,7 +23,7 @@ export const Header: FC = ({ children }) => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar sx={{ zIndex: (theme) => theme.zIndex.appBar }} position="static">
         <Toolbar
           sx={{
             display: 'flex',
@@ -29,14 +31,18 @@ export const Header: FC = ({ children }) => {
           }}
         >
           <Typography>News</Typography>
-          <Categories />
-          <SearchField
-            name="search"
-            placeHolder="Search"
-            value={searchValue}
-            onChange={setSearchValue}
-            onSearch={handleSearch}
-          />
+
+          {activeAction === 'categories' && <Categories />}
+          {activeAction === 'search' && (
+            <SearchField
+              name="search"
+              placeHolder="Search"
+              value={searchValue}
+              onChange={setSearchValue}
+              onSearch={handleSearch}
+            />
+          )}
+          <HeaderActions setActiveAction={setActiveAction} />
         </Toolbar>
       </AppBar>
       {children}

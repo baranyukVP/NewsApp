@@ -1,4 +1,4 @@
-import { ISourceDto } from '../../types';
+import { ISourceDto, TCategory } from '../../types';
 import { INewsDto } from '../../types/News';
 import {
   FetchNews,
@@ -6,10 +6,13 @@ import {
   FetchTopHeadlines,
 } from '../actions/news.actions';
 
+const DEFAULT_CATEGORY: TCategory = 'general';
+
 export interface INewsStore {
   news: INewsDto[];
   newsLoading: boolean;
   newsError: string;
+  category: TCategory;
   sources: ISourceDto[];
   sourcesLoading: boolean;
   sourcesError: string;
@@ -19,6 +22,7 @@ export const initialState: INewsStore = {
   news: [],
   newsLoading: false,
   newsError: '',
+  category: DEFAULT_CATEGORY,
   sources: [],
   sourcesLoading: false,
   sourcesError: '',
@@ -52,6 +56,8 @@ export const newsReducers = (state: INewsStore = initialState, action: any) => {
       return { ...state, newsLoading: false, newsError: action.payload };
     case FetchTopHeadlines.Clear:
       return { ...state, newsLoading: false, news: [], newsError: '' };
+    case FetchTopHeadlines.SetCategory:
+      return { ...state, category: action.payload };
     case FetchSources.Pending:
       return { ...state, sourcesLoading: true, sourcesError: '' };
     case FetchSources.Success:

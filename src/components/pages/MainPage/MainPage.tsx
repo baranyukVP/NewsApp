@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 
-import { CircularProgress, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IStore } from '../../../store';
 import { FetchTopHeadlines } from '../../../store/actions/news.actions';
+import { Loader } from '../../atoms/Loader';
 import NewsList from '../../organisms/NewsList/NewsList';
 
 export const MainPage = () => {
@@ -20,7 +21,10 @@ export const MainPage = () => {
   }, [dispatch]);
 
   return (
-    <Container>{newsLoading ? <CircularProgress /> : <NewsList />}</Container>
+    <Container>
+      <Loader loading={newsLoading} />
+      <NewsList />
+    </Container>
   );
 };
 
