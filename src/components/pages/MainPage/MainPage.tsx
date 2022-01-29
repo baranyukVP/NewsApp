@@ -23,7 +23,7 @@ export const MainPage = () => {
         payload: { category, country: ipInfo?.country?.toLowerCase() },
       });
     }
-  }, [category, dispatch, ipInfo, ipInfo.country]);
+  }, [category, dispatch, ipInfo]);
 
   return (
     <Container>

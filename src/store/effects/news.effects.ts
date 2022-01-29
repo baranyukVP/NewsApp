@@ -14,11 +14,11 @@ import {
   fetchTopHeadlines,
 } from '../services/news.services';
 
-interface INewsAction extends Action {
+export interface INewsAction extends Action {
   payload: INewsPayload;
 }
 
-interface ITopHeadlinesAction extends Action {
+export interface ITopHeadlinesAction extends Action {
   payload: ITopHeadlinesPayload;
 }
 

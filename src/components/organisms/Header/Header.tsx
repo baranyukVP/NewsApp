@@ -1,16 +1,19 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import { AppBar, Toolbar, Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { IStore } from '../../../store';
 import { FetchNews } from '../../../store/actions/news.actions';
 import { FetchUserIpInfo } from '../../../store/actions/user.actions';
-import { SearchField } from '../../atoms/SearchField';
-import { Categories } from '../../molecules/Categories';
-import HeaderActions from '../../molecules/HeaderActions/HeaderActions';
+import SearchField from '../../atoms/SearchField';
+import Categories from '../../molecules/Categories';
+import HeaderActions from '../../molecules/HeaderActions';
 
 export const Header: FC = ({ children }) => {
   const dispatch = useDispatch();
+
+  const { language } = useSelector((store: IStore) => store.user);
 
   const [activeAction, setActiveAction] = useState<string>();
   const [searchValue, setSearchValue] = useState<string>('');
@@ -18,9 +21,9 @@ export const Header: FC = ({ children }) => {
   const handleSearch = useCallback(() => {
     dispatch({
       type: FetchNews.Pending,
-      payload: { q: searchValue },
+      payload: { q: searchValue, language },
     });
-  }, [dispatch, searchValue]);
+  }, [dispatch, language, searchValue]);
 
   useEffect(() => {
     dispatch({

@@ -1,15 +1,19 @@
+import { TLanguage } from '../../types';
+import { IIpInfoDto } from '../../types/IpInfo';
 import { FetchUserIpInfo } from '../actions/user.actions';
 
 export interface IUserStore {
-  ipInfo: any;
+  ipInfo?: IIpInfoDto;
   ipInfoLoading: boolean;
   ipInfoError: string;
+  language: TLanguage;
 }
 
 export const initialState: IUserStore = {
-  ipInfo: {},
+  ipInfo: undefined,
   ipInfoLoading: false,
   ipInfoError: '',
+  language: window.navigator.language.substring(0, 2) as TLanguage,
 };
 
 export const userReducers = (state: IUserStore = initialState, action: any) => {
