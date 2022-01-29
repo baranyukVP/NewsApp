@@ -7,15 +7,20 @@ import {
   fetchNews$,
   fetchSources$,
   fetchTopHeadlines$,
-  setCategory,
 } from './effects/news.effects';
+import { fetchUserIpInfo$ } from './effects/user.effects';
 import { INewsStore, newsReducers } from './reducers/news.reducers';
+import { IUserStore, userReducers } from './reducers/user.reducers';
 
 export interface IStore {
   news: INewsStore;
+  user: IUserStore;
 }
 
-export const rootReducer = combineReducers({ news: newsReducers });
+export const rootReducer = combineReducers({
+  news: newsReducers,
+  user: userReducers,
+});
 
 export const rootEpic = (action$: any, store$: any, dependencies: any) =>
   combineEpics(
@@ -23,7 +28,7 @@ export const rootEpic = (action$: any, store$: any, dependencies: any) =>
     fetchSources$,
     fetchNews$,
     fetchTopHeadlines$,
-    setCategory
+    fetchUserIpInfo$
   )(action$, store$, dependencies).pipe(
     catchError((error, source) => {
       console.error(error);

@@ -1,9 +1,10 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 
 import { FetchNews } from '../../../store/actions/news.actions';
+import { FetchUserIpInfo } from '../../../store/actions/user.actions';
 import { SearchField } from '../../atoms/SearchField';
 import { Categories } from '../../molecules/Categories';
 import HeaderActions from '../../molecules/HeaderActions/HeaderActions';
@@ -20,6 +21,12 @@ export const Header: FC = ({ children }) => {
       payload: { q: searchValue },
     });
   }, [dispatch, searchValue]);
+
+  useEffect(() => {
+    dispatch({
+      type: FetchUserIpInfo.Pending,
+    });
+  }, [dispatch]);
 
   return (
     <>

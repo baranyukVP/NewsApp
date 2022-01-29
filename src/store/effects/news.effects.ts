@@ -60,19 +60,6 @@ export const fetchTopHeadlines$ = (actions$: Observable<ITopHeadlinesAction>) =>
     })
   );
 
-export const setCategory = (actions$: Observable<ITopHeadlinesAction>) =>
-  actions$.pipe(
-    ofType(FetchTopHeadlines.SetCategory),
-    switchMap(({ payload }) =>
-      of({
-        type: FetchTopHeadlines.Pending,
-        payload: {
-          category: payload,
-        },
-      })
-    )
-  );
-
 export const fetchSources$ = (actions$: Observable<Action<any>>) =>
   actions$.pipe(
     ofType(FetchSources.Pending),

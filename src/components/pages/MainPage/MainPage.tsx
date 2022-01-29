@@ -11,14 +11,19 @@ import NewsList from '../../organisms/NewsList/NewsList';
 export const MainPage = () => {
   const dispatch = useDispatch();
 
-  const { newsLoading } = useSelector((state: IStore) => state.news);
+  const {
+    news: { newsLoading, category },
+    user: { ipInfo },
+  } = useSelector((state: IStore) => state);
 
   useEffect(() => {
-    dispatch({
-      type: FetchTopHeadlines.Pending,
-      payload: { category: 'general' },
-    });
-  }, [dispatch]);
+    if (ipInfo) {
+      dispatch({
+        type: FetchTopHeadlines.Pending,
+        payload: { category, country: ipInfo?.country?.toLowerCase() },
+      });
+    }
+  }, [category, dispatch, ipInfo, ipInfo.country]);
 
   return (
     <Container>
