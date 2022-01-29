@@ -33,7 +33,6 @@ export const SearchField: FC<ISearchField> = ({
 
   return (
     <Paper
-      component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
     >
       <InputBase
@@ -41,8 +40,13 @@ export const SearchField: FC<ISearchField> = ({
         name={name}
         value={value}
         onChange={handleOnChange}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            handleSearch();
+          }
+        }}
         placeholder={placeHolder}
-        inputProps={{ 'aria-label': 'search google maps' }}
+        inputProps={{ 'aria-label': 'news search' }}
       />
       <IconButton sx={{ p: '10px' }} onClick={handleSearch} aria-label="search">
         <SearchIcon />

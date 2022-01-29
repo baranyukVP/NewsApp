@@ -1,20 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IStore } from '../../../store';
 import { FetchNews, FetchSources } from '../../../store/actions/news.actions';
 import SearchField from '../../atoms/SearchField';
 import NewsList from '../../organisms/NewsList/NewsList';
-import SourceList from '../../organisms/SourceList';
 
 export const MainPage = () => {
   const dispatch = useDispatch();
 
-  const { sourcesLoading, newsLoading } = useSelector(
-    (state: IStore) => state.news
-  );
+  const { newsLoading } = useSelector((state: IStore) => state.news);
 
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -32,9 +29,7 @@ export const MainPage = () => {
   }, [dispatch, searchValue]);
 
   return (
-    <Box>
-      <Typography>Main Page</Typography>
-      {sourcesLoading ? <CircularProgress /> : <SourceList />}
+    <Container>
       <SearchField
         name="search"
         placeHolder="Search"
@@ -43,7 +38,7 @@ export const MainPage = () => {
         onSearch={handleSearch}
       />
       {newsLoading ? <CircularProgress /> : <NewsList />}
-    </Box>
+    </Container>
   );
 };
 
