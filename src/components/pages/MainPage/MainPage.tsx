@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { Container } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IStore } from '../../../store';
@@ -10,10 +11,11 @@ import NewsList from '../../organisms/NewsList/NewsList';
 
 export const MainPage = () => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
-    news: { newsLoading, category },
-    user: { ipInfo },
+    news: { newsLoading, newsError, category },
+    user: { ipInfo, ipInfoError },
   } = useSelector((state: IStore) => state);
 
   useEffect(() => {
@@ -24,6 +26,16 @@ export const MainPage = () => {
       });
     }
   }, [category, dispatch, ipInfo]);
+
+  useEffect(() => {
+    if (newsError) {
+      enqueueSnackbar(newsError, { variant: 'error' });
+    }
+
+    if (ipInfoError) {
+      enqueueSnackbar(ipInfoError, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, newsError, ipInfoError]);
 
   return (
     <Container>

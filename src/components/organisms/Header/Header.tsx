@@ -10,7 +10,7 @@ import SearchField from '../../atoms/SearchField';
 import Categories from '../../molecules/Categories';
 import HeaderActions from '../../molecules/HeaderActions';
 
-export const Header: FC = ({ children }) => {
+export const Header: FC = () => {
   const dispatch = useDispatch();
 
   const { language } = useSelector((store: IStore) => store.user);
@@ -55,7 +55,6 @@ export const Header: FC = ({ children }) => {
           <HeaderActions setActiveAction={setActiveAction} />
         </Toolbar>
       </AppBar>
-      {children}
     </>
   );
 };

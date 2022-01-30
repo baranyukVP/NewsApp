@@ -1,6 +1,7 @@
 import React from 'react';
 
 import axios from 'axios-observable';
+import { SnackbarProvider } from 'notistack';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -15,9 +16,11 @@ const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <SnackbarProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

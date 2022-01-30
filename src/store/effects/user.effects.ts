@@ -17,7 +17,8 @@ export const fetchUserIpInfo$ = (actions$: Observable<Action<any>>) =>
         catchError((err) =>
           of({
             type: FetchUserIpInfo.Error,
-            payload: err,
+            payload: err?.message || 'error',
+            error: true,
           })
         )
       );

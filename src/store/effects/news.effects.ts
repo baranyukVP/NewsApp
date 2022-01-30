@@ -31,12 +31,13 @@ export const fetchNews$ = (actions$: Observable<INewsAction>) =>
           type: FetchNews.Success,
           payload: data?.data?.articles,
         })),
-        catchError((err) =>
-          of({
+        catchError((err) => {
+          return of({
             type: FetchNews.Error,
-            payload: err,
-          })
-        )
+            payload: err?.message || 'error',
+            error: true,
+          });
+        })
       );
     })
   );
@@ -53,7 +54,8 @@ export const fetchTopHeadlines$ = (actions$: Observable<ITopHeadlinesAction>) =>
         catchError((err) =>
           of({
             type: FetchTopHeadlines.Error,
-            payload: err,
+            payload: err?.message || 'error',
+            error: true,
           })
         )
       );
@@ -72,7 +74,8 @@ export const fetchSources$ = (actions$: Observable<Action<any>>) =>
         catchError((err) =>
           of({
             type: FetchSources.Error,
-            payload: err,
+            payload: err?.message || 'error',
+            error: true,
           })
         )
       );
