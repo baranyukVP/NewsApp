@@ -162,7 +162,6 @@
       }
     ],
     "eol-last": "error",
-    "linebreak-style": ["error", "unix"],
     "valid-jsdoc": "off", // valid-jsdoc задепрекейчен в связи с наличием eslint-plugin-jsdoc
     "dot-notation": "error",
     "quote-props": ["error", "as-needed", { "keywords": true }],
