@@ -1,28 +1,47 @@
 import React, { useEffect } from 'react';
 
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IStore } from '../../../store';
 import { FetchTopHeadlines } from '../../../store/actions/news.actions';
-import { SourceList } from '../../organisms/SourceList';
+import { Loader } from '../../atoms/Loader';
+import NewsList from '../../organisms/NewsList/NewsList';
 
 export const MainPage = () => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
-  const { sourcesLoading } = useSelector((state: IStore) => state.news);
+  const {
+    news: { newsLoading, newsError, category },
+    user: { ipInfo, ipInfoError },
+  } = useSelector((state: IStore) => state);
 
   useEffect(() => {
-    dispatch({
-      type: FetchTopHeadlines.Pending,
-    });
-  }, [dispatch]);
+    if (ipInfo) {
+      dispatch({
+        type: FetchTopHeadlines.Pending,
+        payload: { category, country: ipInfo?.country?.toLowerCase() },
+      });
+    }
+  }, [category, dispatch, ipInfo]);
+
+  useEffect(() => {
+    if (newsError) {
+      enqueueSnackbar(newsError, { variant: 'error' });
+    }
+
+    if (ipInfoError) {
+      enqueueSnackbar(ipInfoError, { variant: 'error' });
+    }
+  }, [enqueueSnackbar, newsError, ipInfoError]);
 
   return (
-    <Box>
-      <Typography>Main Page</Typography>
-      {sourcesLoading ? <CircularProgress /> : <SourceList />}
-    </Box>
+    <Container>
+      <Loader loading={newsLoading} />
+      <NewsList />
+    </Container>
   );
 };
 

@@ -3,17 +3,33 @@ import { combineEpics } from 'redux-observable';
 import { createEpicMiddleware } from 'redux-observable';
 import { catchError } from 'rxjs';
 
-import { fetchTopHeadlines$ } from './effects/news.effects';
+import {
+  fetchNews$,
+  fetchSources$,
+  fetchTopHeadlines$,
+} from './effects/news.effects';
+import { fetchUserIpInfo$ } from './effects/user.effects';
 import { INewsStore, newsReducers } from './reducers/news.reducers';
+import { IUserStore, userReducers } from './reducers/user.reducers';
 
 export interface IStore {
   news: INewsStore;
+  user: IUserStore;
 }
 
-export const rootReducer = combineReducers({ news: newsReducers });
+export const rootReducer = combineReducers({
+  news: newsReducers,
+  user: userReducers,
+});
 
 export const rootEpic = (action$: any, store$: any, dependencies: any) =>
-  combineEpics(fetchTopHeadlines$)(action$, store$, dependencies).pipe(
+  combineEpics(
+    // @ts-ignore
+    fetchSources$,
+    fetchNews$,
+    fetchTopHeadlines$,
+    fetchUserIpInfo$
+  )(action$, store$, dependencies).pipe(
     catchError((error, source) => {
       console.error(error);
 
@@ -21,7 +37,7 @@ export const rootEpic = (action$: any, store$: any, dependencies: any) =>
     })
   );
 
-const epicMiddleware = createEpicMiddleware();
+const epicMiddleware = createEpicMiddleware<any>();
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
