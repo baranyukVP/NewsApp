@@ -62,7 +62,7 @@ export const fetchTopHeadlines$ = (actions$: Observable<ITopHeadlinesAction>) =>
     })
   );
 
-export const fetchSources$ = (actions$: Observable<Action<any>>) =>
+export const fetchSources$ = (actions$: Observable<Action>) =>
   actions$.pipe(
     ofType(FetchSources.Pending),
     switchMap(() => {
