@@ -1,6 +1,6 @@
 import { ISourceDto } from '../Source';
 
-export const SourceMock: ISourceDto = {
+export const sourceMock: ISourceDto = {
   category: 'test',
   country: 'au',
   description: 'test',

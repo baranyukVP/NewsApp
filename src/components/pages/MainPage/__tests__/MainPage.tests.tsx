@@ -1,23 +1,21 @@
-import React from 'react';
-
 import { render, screen } from '@testing-library/react';
 import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
 
-import App from './App';
-import configureStore from './store';
+import configureStore from '../../../../store';
+import MainPage from '../MainPage';
 
-test('renders learn react link', () => {
+test('should render main page', () => {
   const store = configureStore();
 
   render(
     <SnackbarProvider>
       <Provider store={store}>
-        <App />
+        <MainPage />
       </Provider>
     </SnackbarProvider>
   );
-  const menuTitle = screen.getByText(/news/i);
+  const mainPage = screen.getByTestId('main-page');
 
-  expect(menuTitle).toBeInTheDocument();
+  expect(mainPage).toBeInTheDocument();
 });

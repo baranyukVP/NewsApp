@@ -1,13 +1,13 @@
 import { INewsDto } from '../News';
 
-import { SourceMock } from './Source.mocks';
+import { sourceMock } from './Source.mocks';
 
-export const NewsMock: INewsDto = {
+export const newsMock: INewsDto = {
   author: 'test',
   content: 'test',
   description: 'test',
   publishedAt: 'test',
-  source: SourceMock,
+  source: sourceMock,
   title: 'test',
   url: 'http://test.test/test',
   urlToImage: 'http://test.test/image',

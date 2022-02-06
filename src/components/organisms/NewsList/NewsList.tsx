@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { Box } from '@mui/material';
-import { useSelector } from 'react-redux';
 
-import { IStore } from '../../../store';
+import { INewsDto } from '../../../types/News';
 import { News } from '../../molecules/News';
 
-export const NewsList = () => {
-  const { news = [] } = useSelector((store: IStore) => store.news);
+type TNewsListProps = {
+  news?: INewsDto[];
+};
 
+export const NewsList: FC<TNewsListProps> = ({ news = [] }) => {
   return (
     <Box>
       {news?.map((item, index) => (
