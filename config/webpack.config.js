@@ -702,7 +702,7 @@ module.exports = function (webpackEnv) {
             // profile: true,
           },
           issue: {
-            // This one is specifically to match during CI tests,
+            // This one is specifically to match during CI __tests__,
             // as micromatch doesn't match
             // '../cra-template-typescript/template/src/App.tsx'
             // otherwise.

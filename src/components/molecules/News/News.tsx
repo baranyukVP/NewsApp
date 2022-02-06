@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 
 import { OpenInNew } from '@mui/icons-material';
 import {
@@ -15,17 +15,17 @@ import {
 
 import { INewsDto } from '../../../types/News';
 
-interface INewsComponent {
+type TNewsProps = {
   news: INewsDto;
   // animation delay on appearance in ms
   transitionDelay?: number;
-}
+};
 
 const StyledNewsComponent = styled(Card)(({ theme }) => ({
   margin: `${theme.spacing(2)} 0`,
 }));
 
-export const News: FC<INewsComponent> = ({ news, transitionDelay = 0 }) => {
+export const News: FC<TNewsProps> = ({ news, transitionDelay = 0 }) => {
   const handleOpenNews = useCallback(() => {
     if (news.url) {
       window.open(news.url, '_blank');
@@ -38,7 +38,7 @@ export const News: FC<INewsComponent> = ({ news, transitionDelay = 0 }) => {
       timeout={200}
       style={{ transitionDelay: `${transitionDelay}ms` }}
     >
-      <StyledNewsComponent variant="outlined">
+      <StyledNewsComponent variant="outlined" data-testid="card">
         <CardHeader title={news.title} />
         <CardMedia component="img" image={news.urlToImage} alt="news-image" />
         <CardContent>

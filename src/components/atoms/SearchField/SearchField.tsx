@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback } from 'react';
+import { ChangeEvent, FC, useCallback } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { Grow, IconButton, InputBase, Paper } from '@mui/material';
