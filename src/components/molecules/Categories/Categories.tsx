@@ -18,7 +18,7 @@ export const categories: TCategory[] = [
 ];
 
 interface ICategoryStyledProps extends ChipProps {
-  active: boolean;
+  active: 'true' | 'false';
 }
 
 const Category = styled(Chip)<ICategoryStyledProps>(
@@ -27,9 +27,10 @@ const Category = styled(Chip)<ICategoryStyledProps>(
     borderStyle: 'solid',
     borderWidth: '1px',
     margin: theme.spacing(1),
-    backgroundColor: active
-      ? theme.palette.primary.contrastText
-      : theme.palette.primary.main,
+    backgroundColor:
+      active === 'true'
+        ? theme.palette.primary.contrastText
+        : theme.palette.primary.main,
 
     ['&:hover']: {
       color: clickable && theme.palette.primary.contrastText,
@@ -54,7 +55,7 @@ export const Categories = () => {
   };
 
   return (
-    <Stack flexDirection="row">
+    <Stack flexDirection="row" data-testid="categories-wrapper">
       {categories.map((category, index) => (
         <Zoom
           key={category}
@@ -63,12 +64,15 @@ export const Categories = () => {
           style={{ transitionDelay: `${index * 50}ms` }}
         >
           <Category
-            active={activeCategory === category}
+            active={
+              (activeCategory === category).toString() as 'true' | 'false'
+            }
             label={category}
             color="primary"
             onClick={() => handleClick(category)}
             variant={activeCategory === category ? 'outlined' : 'filled'}
             clickable={activeCategory !== category}
+            data-testid="category"
           />
         </Zoom>
       ))}

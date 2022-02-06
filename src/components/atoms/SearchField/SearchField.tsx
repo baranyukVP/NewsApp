@@ -41,18 +41,22 @@ export const SearchField: FC<ISearchField> = ({
           name={name}
           value={value}
           onChange={handleOnChange}
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleSearch();
             }
           }}
           placeholder={placeHolder}
-          inputProps={{ 'aria-label': 'news search' }}
+          inputProps={{
+            'aria-label': 'news search',
+            'data-testid': 'search-field',
+          }}
         />
         <IconButton
           sx={{ p: '10px' }}
           onClick={handleSearch}
           aria-label="search"
+          data-testid="search-button"
         >
           <SearchIcon />
         </IconButton>

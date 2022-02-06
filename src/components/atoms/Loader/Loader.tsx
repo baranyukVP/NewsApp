@@ -14,6 +14,7 @@ export const Loader: FC<ILoaderComponent> = ({ loading = false }) => {
         zIndex: (theme) => theme.zIndex.appBar - 1,
       }}
       open={loading}
+      data-testid="loader"
     >
       <CircularProgress color="inherit" />
     </Backdrop>
