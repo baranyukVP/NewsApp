@@ -1,9 +1,11 @@
+import { TCountry, TLanguage } from './common';
+
 export interface ISourceDto {
   category: string;
-  country: string;
+  country: TCountry;
   description: string;
   id: string;
-  language: string;
+  language: TLanguage;
   name: string;
   url: string;
 }

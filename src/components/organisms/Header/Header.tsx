@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';

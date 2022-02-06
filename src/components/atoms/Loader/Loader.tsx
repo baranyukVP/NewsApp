@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Backdrop, CircularProgress } from '@mui/material';
 
@@ -14,6 +14,7 @@ export const Loader: FC<ILoaderComponent> = ({ loading = false }) => {
         zIndex: (theme) => theme.zIndex.appBar - 1,
       }}
       open={loading}
+      data-testid="loader"
     >
       <CircularProgress color="inherit" />
     </Backdrop>
