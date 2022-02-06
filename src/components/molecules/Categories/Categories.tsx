@@ -1,11 +1,13 @@
-import React from 'react';
+import { useCallback } from 'react';
 
-import { Chip, ChipProps, Stack, styled, Zoom } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IStore } from '../../../store';
 import { FetchTopHeadlines } from '../../../store/actions/news.actions';
 import { TCategory } from '../../../types';
+
+import { Category } from './Category';
 
 export const categories: TCategory[] = [
   'business',
@@ -17,26 +19,6 @@ export const categories: TCategory[] = [
   'technology',
 ];
 
-interface ICategoryStyledProps extends ChipProps {
-  active: boolean;
-}
-
-const Category = styled(Chip)<ICategoryStyledProps>(
-  ({ theme, active, clickable }) => ({
-    borderColor: theme.palette.primary.contrastText,
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    margin: theme.spacing(1),
-    backgroundColor: active
-      ? theme.palette.primary.contrastText
-      : theme.palette.primary.main,
-
-    ['&:hover']: {
-      color: clickable && theme.palette.primary.contrastText,
-    },
-  })
-);
-
 export const Categories = () => {
   const dispatch = useDispatch();
 
@@ -44,33 +26,28 @@ export const Categories = () => {
     (store: IStore) => store.news
   );
 
-  const handleClick = (category: TCategory) => {
-    if (activeCategory !== category) {
-      dispatch({
-        type: FetchTopHeadlines.SetCategory,
-        payload: category,
-      });
-    }
-  };
+  const handleClick = useCallback(
+    (category: TCategory) => {
+      if (activeCategory !== category) {
+        dispatch({
+          type: FetchTopHeadlines.SetCategory,
+          payload: category,
+        });
+      }
+    },
+    [activeCategory, dispatch]
+  );
 
   return (
-    <Stack flexDirection="row">
+    <Stack flexDirection="row" data-testid="categories-wrapper">
       {categories.map((category, index) => (
-        <Zoom
+        <Category
           key={category}
-          in={true}
-          timeout={200}
-          style={{ transitionDelay: `${index * 50}ms` }}
-        >
-          <Category
-            active={activeCategory === category}
-            label={category}
-            color="primary"
-            onClick={() => handleClick(category)}
-            variant={activeCategory === category ? 'outlined' : 'filled'}
-            clickable={activeCategory !== category}
-          />
-        </Zoom>
+          index={index}
+          active={activeCategory === category}
+          category={category}
+          onClick={handleClick}
+        />
       ))}
     </Stack>
   );

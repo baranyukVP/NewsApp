@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
 import { MoreHoriz, Search } from '@mui/icons-material';
 import { IconButton, Stack, styled } from '@mui/material';
@@ -17,10 +17,10 @@ export const HeaderActions: FC<IHeaderActions> = ({ setActiveAction }) => {
   return (
     <Wrapper flexDirection="row">
       <IconButton color="inherit" onClick={() => setActiveAction('search')}>
-        <Search />
+        <Search data-testid="search-icon" />
       </IconButton>
       <IconButton color="inherit" onClick={() => setActiveAction('categories')}>
-        <MoreHoriz />
+        <MoreHoriz data-testid="more-icon" />
       </IconButton>
     </Wrapper>
   );

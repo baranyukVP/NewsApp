@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Chip, Link } from '@mui/material';
 
@@ -12,7 +12,7 @@ export const Source: FC<ISourceComponent> = ({ source }) => {
   const { name, url } = source;
 
   return (
-    <Link href={url} target="_blank">
+    <Link href={url} target="_blank" data-testid="source">
       <Chip sx={{ cursor: 'pointer' }} label={name} color="primary" />
     </Link>
   );

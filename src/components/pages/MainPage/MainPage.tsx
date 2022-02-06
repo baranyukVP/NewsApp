@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { Container } from '@mui/material';
 import { useSnackbar } from 'notistack';
@@ -14,7 +14,7 @@ export const MainPage = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const {
-    news: { newsLoading, newsError, category },
+    news: { news, newsLoading, newsError, category },
     user: { ipInfo, ipInfoError },
   } = useSelector((state: IStore) => state);
 
@@ -38,9 +38,9 @@ export const MainPage = () => {
   }, [enqueueSnackbar, newsError, ipInfoError]);
 
   return (
-    <Container>
+    <Container data-testid="main-page">
       <Loader loading={newsLoading} />
-      <NewsList />
+      <NewsList news={news} />
     </Container>
   );
 };
