@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import { newsMock } from '../../../../types/__mocks__/News.mocks';
-import { sourceMock } from '../../../../types/__mocks__/Source.mocks';
+import { newsMock } from '../../../../__mocks__/News.mocks';
+import { sourceMock } from '../../../../__mocks__/Source.mocks';
 import NewsList from '../NewsList';
 
 test('should render news list with just one element', () => {

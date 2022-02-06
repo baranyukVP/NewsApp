@@ -1,4 +1,4 @@
-import { ISourceDto } from '../Source';
+import { ISourceDto } from '../types';
 
 export const sourceMock: ISourceDto = {
   category: 'test',

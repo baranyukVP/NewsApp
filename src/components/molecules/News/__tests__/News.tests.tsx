@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { newsMock } from '../../../../types/__mocks__/News.mocks';
+import { newsMock } from '../../../../__mocks__/News.mocks';
 import News from '../News';
 
 test('should render article', () => {

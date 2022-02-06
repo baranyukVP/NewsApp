@@ -1,4 +1,4 @@
-import { INewsDto } from '../News';
+import { INewsDto } from '../types/News';
 
 import { sourceMock } from './Source.mocks';
 

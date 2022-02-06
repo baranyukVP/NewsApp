@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { render, screen } from '@testing-library/react';
 import { SnackbarProvider } from 'notistack';
 import { Provider } from 'react-redux';
 
-import App from './App';
-import configureStore from './store';
+import App from '../App';
+import configureStore from '../store';
 
 test('renders learn react link', () => {
   const store = configureStore();

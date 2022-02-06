@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { sourceMock } from '../../../../types/__mocks__/Source.mocks';
+import { sourceMock } from '../../../../__mocks__/Source.mocks';
 import Source from '../Source';
 
 test('should render source', () => {
